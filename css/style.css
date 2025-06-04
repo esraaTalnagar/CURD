@@ -1,0 +1,28 @@
+.custom-img-width{
+    width: 5%;
+}
+section  {
+    background:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../imgs/v617batch2-bb-02-technology.jpg);
+    background-size: cover;
+    background-position: center;
+    height: auto;
+}
+label{
+    color: white;
+}
+
+@keyframes ring {
+    0% { transform: rotate(0deg); }
+    15% { transform: rotate(15deg); }
+    30% { transform: rotate(-10deg); }
+    45% { transform: rotate(15deg); }
+    60% { transform: rotate(-10deg); }
+    75% { transform: rotate(5deg); }
+    100% { transform: rotate(0deg); }
+  }
+  
+  .bell-animation {
+    animation: ring 1s  ease-in-out infinite alternate;
+    -webkit-animation: ring 1s  ease-in-out infinite alternate;
+}
+  

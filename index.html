@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    <section>
+            <div class="container py-5 rounded-3 justify-content-center">
+                <h1 class="text-center text-white">CRUD System</h1>
+                <div class="inputData">
+                    <div>
+                        <label for="ProductName">Inter Product Name</label>
+                        <input type="text" name="" class="w-100 form-control" placeholder="Inter Product Name" id="ProductName">
+                    </div>
+                    <div>
+                        <label for="ProductPrice">Inter Product Price</label>
+                        <input type="number" name="" class="w-100 form-control" placeholder="Inter Product Price" id="ProductPrice">
+                    </div>
+                    <div>
+                        <label for="ProductType">Inter Product Type</label>
+                        <input type="text" name=""  class="w-100 form-control" placeholder="Inter Product Type" id="ProductType">
+                    </div>
+                    <div>
+                        <label for="ProductDescription">Inter Description</label>
+                        <input type="text" name="" class="w-100 form-control" placeholder="Inter Discription" id="ProductDescription">
+                    </div>
+                    <div class="add d-flex align-content-center justify-content-center mt-3">
+                        <button class="btn btn-success"  id="Add">Add</button>
+                    </div>
+                    <div class="add d-none align-content-center justify-content-center mt-3">
+                        <button class="btn btn-success"  id="Update">Update</button>
+                    </div>
+                </div>
+                <input type="search"
+                class="form-control w-50 d-block mx-auto mt-3"
+                id="searchInput"
+                placeholder="search"
+                oninput="search()">
+                <table class="table mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">name</th>
+                            <th scope="col">price</th>
+                            <th scope="col">type</th>
+                            <th scope="col">decription</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
+    </section>
+    <div id="toastBox" role="alert" aria-live="assertive" aria-atomic="true" class="toast  bg-success position-fixed top-0 start-50 translate-middle-x align-items-center z-3" data-bs-autohide="false">
+        <div class="toast-header">
+          <img src="imgs/alert-app-bell-svgrepo-com.svg" class="rounded me-2 custom-img-width bell-animation" alt="ring">
+          <strong class="me-auto">massege!</strong>
+          <small>now</small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="toastMessage">
+        </div>
+      </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
