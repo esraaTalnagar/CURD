@@ -12,23 +12,27 @@
 <body>
     <section>
             <div class="container py-5 rounded-3 justify-content-center">
-                <h1 class="text-center text-white">CRUD System</h1>
+                <h1 class="text-center text-dark">CRUD System</h1>
                 <div class="inputData">
                     <div>
                         <label for="ProductName">Inter Product Name</label>
                         <input type="text" name="" class="w-100 form-control" placeholder="Inter Product Name" id="ProductName">
+                        <div class="alert alert-danger d-none" id="nameError"> your word must be between 4 and 8 letters</div>
                     </div>
                     <div>
                         <label for="ProductPrice">Inter Product Price</label>
                         <input type="number" name="" class="w-100 form-control" placeholder="Inter Product Price" id="ProductPrice">
+                        <div class="alert alert-danger d-none" id="priceError">Price must be between 1000 and 10000</div>
                     </div>
                     <div>
                         <label for="ProductType">Inter Product Type</label>
                         <input type="text" name=""  class="w-100 form-control" placeholder="Inter Product Type" id="ProductType">
+                        <div class="alert alert-danger d-none" id="typeError">Type must be one of: Mobile, Screen, Watch</div>
                     </div>
                     <div>
                         <label for="ProductDescription">Inter Description</label>
                         <input type="text" name="" class="w-100 form-control" placeholder="Inter Discription" id="ProductDescription">
+                        <div class="alert alert-danger d-none" id="descError">Description must be between 5 and 1000 characters</div>
                     </div>
                     <div class="add d-flex align-content-center justify-content-center mt-3">
                         <button class="btn btn-success"  id="Add">Add</button>

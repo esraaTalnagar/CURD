@@ -18,6 +18,9 @@ if (localStorage.getItem("products") != null) {
 
 
 addBtn.addEventListener('click', function addProduct(){
+    if (!validation()) {
+      return;
+    }
     if (productName.value == "" || productPrice.value == "" || productType.value == "" || productDesc.value == "") {
         showToast("All Fields Are Required!", "warning");
         return;
@@ -105,6 +108,9 @@ editProduct = function(index){
 }
 
 updateBtn.addEventListener('click', function(){
+    if (!validation()) {
+      return;
+    }
     if (
       productName.value == "" ||
       productPrice.value == "" ||
@@ -148,3 +154,47 @@ function showToast(message, color) {
     var toast = new bootstrap.Toast(toastBox);
     toast.show();
 }
+
+function validation() {
+  // استرجاع القيم من الحقول
+  var name = productName.value.trim();
+  var price = parseFloat(productPrice.value.trim());
+  var type = productType.value.trim();
+  var desc = productDesc.value.trim();
+
+  // تحديد عناصر رسائل الخطأ
+  var nameError = document.getElementById("nameError");
+  var priceError = document.getElementById("priceError");
+  var typeError = document.getElementById("typeError");
+  var descError = document.getElementById("descError");
+
+  nameError.classList.add("d-none");
+  priceError.classList.add("d-none");
+  typeError.classList.add("d-none");
+  descError.classList.add("d-none");
+
+  var isValid = true;
+
+  if (!/^[A-Z][a-zA-Z]{3,7}$/.test(name)) {
+    nameError.classList.remove("d-none");
+    isValid = false;
+  }
+
+  if (isNaN(price) || price < 1000 || price > 10000) {
+    priceError.classList.remove("d-none");
+    isValid = false;
+  }
+
+  if (!/^(Mobile|Screen|Watch)$/.test(type)) {
+    typeError.classList.remove("d-none");
+    isValid = false;
+  }
+
+  if (desc.length < 5 || desc.length > 1000) {
+    descError.classList.remove("d-none");
+    isValid = false;
+  }
+
+  return isValid;
+}
+
