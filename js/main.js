@@ -9,6 +9,10 @@ var deleteProduct = document.getElementById("delete");
 var searchInput = document.getElementById("searchInput");
 var toastBox = document.getElementById("toastBox");
 var toastMessage = document.getElementById("toastMessage");
+var nameError = document.getElementById("nameError");
+var priceError = document.getElementById("priceError");
+var typeError = document.getElementById("typeError");
+var descError = document.getElementById("descError");
 
 var productList =[];
 if (localStorage.getItem("products") != null) {
@@ -21,10 +25,6 @@ addBtn.addEventListener('click', function addProduct(){
     if (!validation()) {
       return;
     }
-    if (productName.value == "" || productPrice.value == "" || productType.value == "" || productDesc.value == "") {
-        showToast("All Fields Are Required!", "warning");
-        return;
-    }
     var product = {
         name: productName.value,
         price: productPrice.value,
@@ -34,10 +34,10 @@ addBtn.addEventListener('click', function addProduct(){
     productList.push(product);
     localStorage.setItem("products", JSON.stringify(productList));
     clearForm();
+    clearErrors();
     display();
     showToast("Good Job! Product Added Successfully", "success");
 });
-;
 
 function clearForm(){
     productName.value = '';
@@ -111,15 +111,6 @@ updateBtn.addEventListener('click', function(){
     if (!validation()) {
       return;
     }
-    if (
-      productName.value == "" ||
-      productPrice.value == "" ||
-      productType.value == "" ||
-      productDesc.value == ""
-    ) {
-      showToast("All Fields Are Required!", "warning");
-      return;
-    }
     var product = {
         name: productName.value,
         price: productPrice.value,
@@ -130,6 +121,7 @@ updateBtn.addEventListener('click', function(){
     localStorage.setItem("products", JSON.stringify(productList));
     display();
     clearForm();
+    clearErrors();
     addBtn.parentElement.classList.replace("d-none","d-flex");
     updateBtn.parentElement.classList.replace("d-flex","d-none");
 }) ;
@@ -156,45 +148,62 @@ function showToast(message, color) {
 }
 
 function validation() {
-  // استرجاع القيم من الحقول
-  var name = productName.value.trim();
-  var price = parseFloat(productPrice.value.trim());
-  var type = productType.value.trim();
-  var desc = productDesc.value.trim();
+clearErrors();
+var name = productName.value.trim();
+var price = parseFloat(productPrice.value.trim());
+var type = productType.value.trim();
+var desc = productDesc.value.trim();
 
-  // تحديد عناصر رسائل الخطأ
-  var nameError = document.getElementById("nameError");
-  var priceError = document.getElementById("priceError");
-  var typeError = document.getElementById("typeError");
-  var descError = document.getElementById("descError");
+priceError.classList.add("d-none");
+nameError.classList.add("d-none");
+typeError.classList.add("d-none");
+descError.classList.add("d-none");
+productName.classList.add("is-valid");
+productPrice.classList.add("is-valid");
+productType.classList.add("is-valid");
+productDesc.classList.add("is-valid");
 
-  nameError.classList.add("d-none");
-  priceError.classList.add("d-none");
-  typeError.classList.add("d-none");
-  descError.classList.add("d-none");
 
-  var isValid = true;
+var isValid = true;
 
-  if (!/^[A-Z][a-zA-Z]{3,7}$/.test(name)) {
+if (!/^[A-Z][a-zA-Z]{3,7}$/.test(name)) {
     nameError.classList.remove("d-none");
+    productName.classList.add("is-invalid");
+    productName.classList.remove("is-valid");
     isValid = false;
-  }
-
-  if (isNaN(price) || price < 1000 || price > 10000) {
-    priceError.classList.remove("d-none");
-    isValid = false;
-  }
-
-  if (!/^(Mobile|Screen|Watch)$/.test(type)) {
-    typeError.classList.remove("d-none");
-    isValid = false;
-  }
-
-  if (desc.length < 5 || desc.length > 1000) {
-    descError.classList.remove("d-none");
-    isValid = false;
-  }
-
-  return isValid;
 }
 
+if (isNaN(price) || price < 1000 || price > 10000) {
+    priceError.classList.remove("d-none");
+    productPrice.classList.add("is-invalid");
+    productPrice.classList.remove("is-valid");
+    isValid = false;
+}
+
+if (!/^(Mobile|Screen|Watch|mobile|screen|watch)$/.test(type)) {
+    typeError.classList.remove("d-none");
+    productType.classList.add("is-invalid");
+    productType.classList.remove("is-valid");
+    isValid = false;
+}
+
+if (desc.length < 5 || desc.length > 1000) {
+    descError.classList.remove("d-none");
+    productDesc.classList.add("is-invalid");
+    productDesc.classList.remove("is-valid");
+    isValid = false;
+}
+
+return isValid;
+}
+
+function clearErrors(){
+    nameError.classList.add("d-none");
+    priceError.classList.add("d-none");
+    typeError.classList.add("d-none");
+    descError.classList.add("d-none");
+    productName.classList.remove("is-invalid", "is-valid");
+    productPrice.classList.remove("is-invalid", "is-valid");
+    productType.classList.remove("is-invalid", "is-valid");
+    productDesc.classList.remove("is-invalid", "is-valid");
+}
